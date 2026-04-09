@@ -1,0 +1,12 @@
+title = "Technical Portfolio"
+base_url = "https://impeccableshoddy.github.io"
+compile_sass = true
+build_search_index = false
+
+[markdown]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+[extra]
+# Put all your custom variables here
