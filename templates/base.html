@@ -15,19 +15,24 @@
 <body>
 
   <nav>
-    <a class="nav-logo" href="{{ get_url(path='/') }}">The <span>Red</span> Orchard</a>
-    <ul class="nav-links">
-      <li><a href="{{ get_url(path='/') }}">The Orchard</a></li>
-      <li><a href="{{ get_url(path='/shack/') }}">The Shack</a></li>
-      <li><a href="{{ get_url(path='/redberries/') }}">Redberries</a></li>
-      <li><a href="{{ get_url(path='/dossier/') }}">The Dossier</a></li>
-      <li>
-  <a href="https://github.com/impeccableshoddy" aria-label="GitHub" style="border:none;">
-    <img src="{{ get_url(path='images/github.svg') }}" alt="GitHub" style="width:1.2rem;height:1.2rem;vertical-align:middle;opacity:0.7;transition:opacity 0.2s;">
-  </a>
-</li>
-    </ul>
-  </nav>
+  <a class="nav-logo" href="{{ get_url(path='/') }}">The <span>Red</span> Orchard</a>
+  <button class="nav-toggle" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="{{ get_url(path='/') }}">The Orchard</a></li>
+    <li><a href="{{ get_url(path='/shack/') }}">The Shack</a></li>
+    <li><a href="{{ get_url(path='/redberries/') }}">Redberries</a></li>
+    <li><a href="{{ get_url(path='/dossier/') }}">The Dossier</a></li>
+    <li>
+      <a href="https://github.com/impeccableshoddy" aria-label="GitHub" style="border:none;">
+        <img src="{{ get_url(path='images/github.svg') }}" alt="GitHub" style="width:1.2rem;height:1.2rem;vertical-align:middle;opacity:0.7;transition:opacity 0.2s;">
+      </a>
+    </li>
+  </ul>
+</nav>
 
   <main>
     {% block content %}{% endblock %}
@@ -37,6 +42,28 @@
     <p>Words can be misleading. No one knows better. But trust me.</p>
   </footer>
   <script>
+      const toggle = document.querySelector(".nav-toggle");
+  const links = document.querySelector(".nav-links");
+
+  toggle.addEventListener("click", function() {
+    toggle.classList.toggle("open");
+    links.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(function(link) {
+    link.addEventListener("click", function() {
+      toggle.classList.remove("open");
+      links.classList.remove("open");
+    });
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!e.target.closest("nav")) {
+      toggle.classList.remove("open");
+      links.classList.remove("open");
+    }
+  });
+
   let lastKey = "";
   let lastKeyTime = 0;
 
@@ -56,6 +83,7 @@
     lastKey = k;
     lastKeyTime = now;
   });
+
 </script>
 </body>
 </html>
