@@ -1,0 +1,466 @@
+/* ============================================
+   THE RED ORCHARD — main.css
+   ============================================ */
+
+/* EB Garamond - Body */
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/eb-garamond-v32-latin-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/eb-garamond-v32-latin-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/eb-garamond-v32-latin-700.woff2") format("woff2");
+}
+
+/* Cormorant Garamond - Headings */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  /* Matching your 500 download */
+  font-weight: 500;
+  src: url("../fonts/cormorant-garamond-v21-latin-500.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/cormorant-garamond-v21-latin-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/jetbrains-mono-v18-latin-regular.woff2") format("woff2");
+}
+
+/* --- Variables --- */
+:root {
+  --bg: #f7f4ef;
+  --ink: #1a1a1a;
+  --red: #8b3a2a;
+  --faint: #e8e3db;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --measure: 76ch;
+  --space-xs: 0.5rem;
+  --space-s: 1rem;
+  --space-m: 1.75rem;
+  --space-l: 3rem;
+  --space-xl: 6rem;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 20px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: #0a0a0a;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Typography Scale --- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+h3 {
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+h4 {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: var(--measure);
+}
+
+p + p {
+  margin-top: 1.2em;
+  text-indent: 1.5em;
+}
+
+a {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--red);
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 500;
+}
+
+/* Small caps utility */
+.small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+}
+
+/* --- Drop Cap --- */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.2em;
+  font-weight: 500;
+  float: left;
+  line-height: 0.82;
+  margin-right: 0.08em;
+  margin-top: 0.06em;
+  color: var(--red);
+}
+
+/* --- Layout --- */
+.container {
+  width: min(90%, 780px);
+  margin-inline: auto;
+}
+
+.container--wide {
+  width: min(92%, 1100px);
+  margin-inline: auto;
+}
+
+section {
+  padding-block: var(--space-xl);
+}
+
+/* --- Nav --- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: var(--space-s) var(--space-m);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-bottom: 1px solid var(--faint);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  border: none;
+}
+
+.nav-logo span {
+  color: var(--red);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: var(--space-m);
+}
+
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--red);
+}
+
+.nav-links img:hover {
+  opacity: 1 !important;
+}
+
+/* --- Hero / This Way In --- */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  margin-bottom: var(--space-s);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-m);
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #555;
+  max-width: 50ch;
+  line-height: 1.7;
+}
+
+.hero-rule {
+  width: 3rem;
+  height: 1px;
+  background: var(--red);
+  margin-block: var(--space-l);
+}
+
+/* --- Section headers --- */
+.section-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  color: var(--red);
+  margin-bottom: var(--space-s);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  margin-bottom: var(--space-m);
+}
+
+/* --- Divider --- */
+.divider {
+  border: none;
+  border-top: 1px solid var(--faint);
+  margin-block: var(--space-l);
+}
+
+/* --- Work cards (The Shack) --- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-m);
+  margin-top: var(--space-m);
+}
+
+.work-card {
+  border: 1px solid var(--faint);
+  padding: var(--space-m);
+  transition: border-color 0.2s ease;
+}
+
+.work-card:hover {
+  border-color: var(--red);
+}
+
+.work-card-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: var(--red);
+  margin-bottom: var(--space-xs);
+}
+
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.work-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.65;
+  max-width: 100%;
+}
+
+/* --- Redberries (log) list --- */
+.berry-list {
+  list-style: none;
+  margin-top: var(--space-m);
+}
+
+.berry-item {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: var(--space-s);
+  padding-block: var(--space-s);
+  border-bottom: 1px solid var(--faint);
+  align-items: baseline;
+}
+
+.berry-date {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #888;
+}
+
+.berry-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+
+.berry-title:hover {
+  color: var(--red);
+  border: none;
+}
+
+/* --- Footer --- */
+footer {
+  padding-block: var(--space-l);
+  border-top: 1px solid var(--faint);
+  text-align: center;
+}
+
+footer p {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #888;
+  max-width: 100%;
+  text-indent: 0;
+}
+
+/* --- Prose pages (individual redberry, shack entry) --- */
+.prose {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-top: 6rem;
+  padding-bottom: var(--space-xl);
+}
+
+.prose h1 {
+  margin-bottom: var(--space-s);
+}
+
+.prose .meta {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-l);
+}
+
+.prose p:first-of-type {
+  text-indent: 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--faint);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+pre {
+  background: #1a1a1a;
+  color: #f7f4ef;
+  padding: var(--space-m);
+  overflow-x: auto;
+  margin-block: var(--space-m);
+  font-family: var(--font-mono);
+  padding: var(--space-s);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  nav {
+    padding: var(--space-s);
+  }
+
+  .nav-links {
+    gap: var(--space-s);
+  }
+
+  .berry-item {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .berry-date {
+    font-size: 0.78rem;
+  }
+}

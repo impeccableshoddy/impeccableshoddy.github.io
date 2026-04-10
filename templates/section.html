@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="prose">
+  <p class="section-label">{{ section.title }}</p>
+  <h1 class="section-title">{{ section.description | default(value=section.title) }}</h1>
+  <hr class="divider">
+
+  {% if section.path == "/shack/" %}
+    <div class="work-grid">
+      {% for page in section.pages %}
+      <a href="{{ page.permalink }}" style="text-decoration: none;">
+        <div class="work-card">
+          <p class="work-card-label">{{ page.extra.type | default(value="project") }}</p>
+          <h3 class="work-card-title">{{ page.title }}</h3>
+          <p class="work-card-desc">{{ page.description | default(value="") }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <ul class="berry-list">
+      {% for page in section.pages %}
+      <li class="berry-item">
+        <span class="berry-date">{{ page.date | date(format="%b %Y") }}</span>
+        <a class="berry-title" href="{{ page.permalink }}">{{ page.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}

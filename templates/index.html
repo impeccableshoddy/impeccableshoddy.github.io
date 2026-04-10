@@ -1,10 +1,84 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>{{ config.title }}</title>
-  </head>
-  <body style="background: #111; color: #eee; font-family: sans-serif">
-    {{ section.content | safe }}
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- This Way In -->
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Welcome to</p>
+    <h1 class="hero-title">The <em>Red</em><br>Orchard</h1>
+    <p class="hero-sub">Where we talk about exotic trees, beautiful orchards, and express our undying love for them!<br>Plated by yours truly.
+    <br><br>
+   As if things are allowed to be that simple around here.</p>
+    <div class="hero-rule"></div>
+  </div>
+</section>
+
+<!-- How This Grew -->
+<section id="how-this-grew">
+  <div class="container">
+    <p class="section-label">How This Grew</p>
+    <h2 class="section-title">On the making of this space</h2>
+    <hr class="divider">
+    <p>Like all great things come to be, this site is a direct result of my then due impending university assignment. I have always sort of wanted to write for some time now. Never knew the <b>how</b>, specially when I didn't have the <b>what</b>. But somehow with the magical pressure of deadline, here we are. And while this started as a reaction, I hope to end this as a choice. Going forward I shall work to whack at these  bafflegabs and try  to derive some god forbid sense from them. Because while different, I think it's moderately safe to assume we are all plagued by these flapdoodles in our quotidian existence. And while it's completely fair and fine to be prim and proper and let them be, I'm sort of what they call a rabble-rouser ya see? not to mention it tickles me the wrong way to have something so erratic dictate the course of my life. And I'm also painfully aware of this privilege which many do not get to have, to have time as abundant as to question the finer and more optional things in life. Thus through this space I hope to best utilize this privilege, and keep accounts of such occurrences and what I make of them.</p>
+  </div>
+</section>
+
+<!-- The Mind Behind the Vines -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">The Mind Behind the Vines</p>
+    <h2 class="section-title">Who tends this place</h2>
+    <hr class="divider">
+    <p class="drop-cap">{{ section.content | safe }}</p>
+  </div>
+</section>
+
+<!-- Recent Redberries -->
+<section id="redberries-preview">
+  <div class="container">
+    <p class="section-label">Redberries</p>
+    <h2 class="section-title">Recent notes</h2>
+    <hr class="divider">
+    {% set redberries = get_section(path="redberries/_index.md") %}
+    {% if redberries.pages %}
+      <ul class="berry-list">
+        {% for page in redberries.pages | slice(end=4) %}
+        <li class="berry-item">
+          <span class="berry-date">{{ page.date | date(format="%b %Y") }}</span>
+          <a class="berry-title" href="{{ page.permalink }}">{{ page.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p style="font-style: italic; color: #888;">The first redberry is still ripening.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Recent Shack work -->
+<section id="shack-preview">
+  <div class="container">
+    <p class="section-label">The Shack</p>
+    <h2 class="section-title">What's being built</h2>
+    <hr class="divider">
+    {% set shack = get_section(path="shack/_index.md") %}
+    {% if shack.pages %}
+      <div class="work-grid">
+        {% for page in shack.pages | slice(end=3) %}
+        <a href="{{ page.permalink }}" style="text-decoration: none;">
+          <div class="work-card">
+            <p class="work-card-label">{{ page.extra.type | default(value="project") }}</p>
+            <h3 class="work-card-title">{{ page.title }}</h3>
+            <p class="work-card-desc">{{ page.description | default(value="") }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="font-style: italic; color: #888;">The shack is still being built.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

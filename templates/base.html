@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    {% if page.title %}{{ page.title }} — The Red Orchard{% else %}The Red Orchard{% endif %}
+  </title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}The Red Orchard — a living space for work, thought, and making.{% endif %}" />
+  
+  <link rel="stylesheet" href="{{ get_url(path='css/main.css', cachebust=true) }}" />
+  <link rel="icon" type="image/svg+xml" href="{{ get_url(path='images/favicon.svg') }}">
+  <link rel="stylesheet" href="{{ get_url(path='css/giallo.css') }}">
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="{{ get_url(path='/') }}">The <span>Red</span> Orchard</a>
+    <ul class="nav-links">
+      <li><a href="{{ get_url(path='/') }}">The Orchard</a></li>
+      <li><a href="{{ get_url(path='/shack/') }}">The Shack</a></li>
+      <li><a href="{{ get_url(path='/redberries/') }}">Redberries</a></li>
+      <li>
+  <a href="https://github.com/impeccableshoddy" aria-label="GitHub" style="border:none;">
+    <img src="{{ get_url(path='images/github.svg') }}" alt="GitHub" style="width:1.2rem;height:1.2rem;vertical-align:middle;opacity:0.7;transition:opacity 0.2s;">
+  </a>
+</li>
+    </ul>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Words can be misleading. No one knows better. But trust me.</p>
+  </footer>
+</body>
+</html>
