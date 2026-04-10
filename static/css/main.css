@@ -446,13 +446,73 @@ pre code {
 }
 
 /* --- Responsive --- */
-@media (max-width: 600px) {
+
+/* --- Mobile Nav --- */
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+/* --- Fluid spacing --- */
+.hero {
+  padding-top: 5rem;
+}
+
+.prose {
+  padding-top: 5rem;
+}
+
+section {
+  scroll-margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+
   nav {
-    padding: var(--space-s);
+    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 
   .nav-links {
-    gap: var(--space-s);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    min-height: 100svh;
+    padding-top: 7rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 10vw, 4rem);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .prose {
+    padding-top: 7rem;
+    width: 92%;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
   }
 
   .berry-item {
@@ -462,5 +522,42 @@ pre code {
 
   .berry-date {
     font-size: 0.78rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+  }
+
+  footer > div {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .drop-cap::first-letter {
+    font-size: 3.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 16px;
+  }
+
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  section {
+    padding-block: var(--space-l);
   }
 }
