@@ -20,6 +20,7 @@
       <li><a href="{{ get_url(path='/') }}">The Orchard</a></li>
       <li><a href="{{ get_url(path='/shack/') }}">The Shack</a></li>
       <li><a href="{{ get_url(path='/redberries/') }}">Redberries</a></li>
+      <li><a href="{{ get_url(path='/dossier/') }}">The Dossier</a></li>
       <li>
   <a href="https://github.com/impeccableshoddy" aria-label="GitHub" style="border:none;">
     <img src="{{ get_url(path='images/github.svg') }}" alt="GitHub" style="width:1.2rem;height:1.2rem;vertical-align:middle;opacity:0.7;transition:opacity 0.2s;">
@@ -35,5 +36,26 @@
   <footer>
     <p>Words can be misleading. No one knows better. But trust me.</p>
   </footer>
+  <script>
+  let lastKey = "";
+  let lastKeyTime = 0;
+
+  document.addEventListener("keydown", function(e) {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    const k = e.key;
+    const now = Date.now();
+    const amount = window.innerHeight * 0.3;
+
+    if (k === "j") window.scrollBy(0, amount);
+    if (k === "k") window.scrollBy(0, -amount);
+    if (k === "h") history.back();
+    if (k === "l") history.forward();
+    if (k === "G") window.scrollTo(0, document.body.scrollHeight);
+    if (k === "g" && lastKey === "g" && (now - lastKeyTime) < 500) window.scrollTo(0, 0);
+
+    lastKey = k;
+    lastKeyTime = now;
+  });
+</script>
 </body>
 </html>
