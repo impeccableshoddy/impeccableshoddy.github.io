@@ -237,13 +237,13 @@ Color trace_ray (Vec3 O, Vec3 D, Sphere *S, int num_of_spheres, float t_min, flo
 }
 ```
 
-*Ew, what is that?!* that was my reaction when I read my own code tried to understand it just 2 days later! But no need to fear, since then I have developed a great tolerance for such atrocities and shall take a look at it for you instead and try to explain it.
+*Ew, what is that?!* that was my reaction when I read my own code trying to understand it just 2 days later! But no need to fear, since then I have developed a great tolerance for such atrocities and shall take a look at it for you instead and try to explain it.
 
 So as established, we take in the origin, direction and the array of spheres and the other 3 arguments being the no. of spheres, minimum t and maximum t (*more on this in just a bit*).
 
-This `t` is actually a point on along the ray at any given time. Representing the distance along the ray from it's origin. And how does that matter you ask? well it matters very much my friend.
+This `t` is actually a point along the ray at any given time. Representing the distance along the ray from it's origin. And how does that matter you ask? well it matters very much my friend.
 
-Remember that ray equation we have been fussing so much about about? well turns out, it's a pretty big part of it.
+Remember that ray equation we have been fussing so much about? well turns out, it's a pretty big part of it.
 
 ​	`P = O + t*D`
 
@@ -253,7 +253,7 @@ Positive values of `t` place `P` in front of the origin (along the ray), while n
 
 In ray tracing, we only consider intersections where `t > 0` aka `t` is positive. And typically within a valid range `[t_min, t_max]`. `t_max` usually being `INFINITY` or some other absurdly large number.
 
-Now that we have established that you can scroll back to our code snippet above and very easily make out that it is thus used to act out a bunch of conditional statements to perform checks and what to do in each case if the `t` value returned by (updated by) the function `intersect_ray_sphere(O, D, &S[i], &t1, &t2);`.
+Now that we have established that, you can scroll back to our code snippet above and very easily make out that it is thus used to act out a bunch of conditional statements. To perform checks for each value of `t` returned by (updated by) the function `intersect_ray_sphere(O, D, &S[i], &t1, &t2);`.
 
 Which takes in the origin `O`, direction `D` and our `t1` and `t2` and does something like this :
 
@@ -294,7 +294,7 @@ And now we will derive our way into that abomination looming above us by putting
 
 1. `(O + t*D - C) . (O + t*D - C) = r^2`
 
-2. Let `OC = O - C` where we do vector subtraction by - 
+2. Let `OC = O - C`, where we do vector subtraction by - 
 
    ```c
    Vec3 vec3_sub (Vec3 A, Vec3 B) {
@@ -313,7 +313,7 @@ And now we will derive our way into that abomination looming above us by putting
 
 *huff!* and now we just simplify that for easier use and understanding and assign as `a = D.D` and so on, to get the classic form `at^2 + bt + c = 0`.
 
-Now take a look at the above abomination once again and see if it's a bit easier on the eyes. (*Hopefully! Keep looking, if not, it gets easier with time. For severe consideration one might consider taking a look at others abomination to truly appreciate ones own >_<*)
+Now take a look at the above abomination once again and see if it's a bit easier on the eyes. (*Hopefully! If not, keep looking, as it gets easier with time. For severe consideration one might consider taking a look at others abomination to truly appreciate ones own >_<*)
 
 Okay so we are almost done now since we have made sense of what the `a`, `b` and `c` are we can now make sense of the rest pretty easily.
 
@@ -365,9 +365,9 @@ void write_ppm ( const char *filename, Color pixels[][CANVAS_WIDTH])
 }
 ```
 
-Which takes file name and the canvas array as arguments and then creates a writable file with that filename and outputs a ppm format onto it, by running a loop and printing one pixel at a time until the whole canvas isn't printed.
+Which takes file name and the canvas array as arguments and then creates a writable file with that filename and outputs a ppm format onto it, by running a loop and printing one pixel at a time until the whole canvas is printed.
 
-That's it, that's genuinely it. All of this went into making this right here *[Fig 1](#fig1)*.
+That's it, that's genuinely it. All that to get our *[Fig 1](#fig1)* which you saw above.
 
 ---
 
@@ -377,7 +377,7 @@ For those who want to dig into the header files or see how the PPM logic is actu
 
 ---
 
-Hope you had as much fun I had while learning about and doing this whole project myself.
+Hope had fun and learned something.
 
 And if you followed along, *kudos!*
 
