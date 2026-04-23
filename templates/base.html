@@ -10,11 +10,11 @@
   
   <link rel="stylesheet" href="{{ get_url(path='css/main.css', cachebust=true) }}" />
   <link rel="icon" type="image/svg+xml" href="{{ get_url(path='images/favicon.svg') }}">
-  <link rel="stylesheet" href="{{ get_url(path='css/giallo.css') }}">
+  <link rel="stylesheet" href="{{ get_url(path='giallo.css') }}">
 </head>
 <body>
 
-  <nav>
+  <nav class="site-nav">
   <a class="nav-logo" href="{{ get_url(path='/') }}">The <span>Red</span> Orchard</a>
   <button class="nav-toggle" aria-label="Toggle navigation">
     <span></span>
@@ -63,6 +63,33 @@
       links.classList.remove("open");
     }
   });
+
+const secretKey = document.getElementById("secretKey");
+if (secretKey) {
+  const bloom = document.createElement("div");
+  bloom.className = "key-bloom";
+  bloom.innerHTML = `<p>
+    You found something.<br>
+    <span>j / k</span>  to scroll.<br>
+    <span>gg</span>  to surface.<br>
+    <span>G</span>  to sink.<br>
+    <span>h / l</span>  to wander.
+  </p>`;
+  secretKey.appendChild(bloom);
+
+  secretKey.addEventListener("click", function(e) {
+    e.stopPropagation();
+    secretKey.classList.toggle("open");
+    bloom.classList.toggle("open");
+  });
+
+  document.addEventListener("click", function(e) {
+    if (!secretKey.contains(e.target)) {
+      secretKey.classList.remove("open");
+      bloom.classList.remove("open");
+    }
+  });
+}
 
   let lastKey = "";
   let lastKeyTime = 0;

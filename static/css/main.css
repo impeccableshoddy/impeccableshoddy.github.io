@@ -2,7 +2,11 @@
    THE RED ORCHARD — main.css
    ============================================ */
 
-/* EB Garamond - Body */
+/* ============================================
+   FONTS
+   ============================================ */
+
+/* EB Garamond — Body */
 @font-face {
   font-family: "EB Garamond";
   font-style: normal;
@@ -24,11 +28,10 @@
   src: url("../fonts/eb-garamond-v32-latin-700.woff2") format("woff2");
 }
 
-/* Cormorant Garamond - Headings */
+/* Cormorant Garamond — Headings */
 @font-face {
   font-family: "Cormorant Garamond";
   font-style: normal;
-  /* Matching your 500 download */
   font-weight: 500;
   src: url("../fonts/cormorant-garamond-v21-latin-500.woff2") format("woff2");
 }
@@ -40,14 +43,18 @@
   src: url("../fonts/cormorant-garamond-v21-latin-700.woff2") format("woff2");
 }
 
+/* JetBrains Mono — Code */
 @font-face {
   font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/jetbrains-mono-v18-latin-regular.woff2") format("woff2");
+  src: url("../fonts/jetbrains-mono-v24-latin-regular.woff2") format("woff2");
 }
 
-/* --- Variables --- */
+/* ============================================
+   VARIABLES
+   ============================================ */
+
 :root {
   --bg: #f7f4ef;
   --ink: #1a1a1a;
@@ -66,7 +73,10 @@
   --space-xl: 6rem;
 }
 
-/* --- Reset & Base --- */
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
 *,
 *::before,
 *::after {
@@ -89,7 +99,21 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Typography Scale --- */
+hr {
+  border: none;
+  border-top: 1px solid var(--faint);
+  margin-block: var(--space-l);
+}
+
+section {
+  padding-block: var(--space-xl);
+  scroll-margin-top: 4rem;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
 h1,
 h2,
 h3,
@@ -126,6 +150,19 @@ p + p {
   text-indent: 1.5em;
 }
 
+/* suppress indent after non-paragraph elements */
+pre + p,
+figure + p,
+ul + p,
+ol + p,
+blockquote + p,
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p {
+  text-indent: 0;
+}
+
 a {
   color: var(--red);
   text-decoration: none;
@@ -142,28 +179,35 @@ em {
 }
 
 strong {
-  font-weight: 500;
+  font-weight: 700;
 }
 
-/* Small caps utility */
 .small-caps {
   font-variant: small-caps;
   letter-spacing: 0.08em;
 }
 
-/* --- Drop Cap --- */
-.drop-cap::first-letter {
+/* ============================================
+   DROP CAP
+   Target only the first paragraph of prose
+   content, not headings or the div wrapper.
+   ============================================ */
+
+.prose .content > p:first-of-type::first-letter {
   font-family: var(--font-display);
   font-size: 4.2em;
   font-weight: 500;
   float: left;
-  line-height: 0.82;
+  line-height: 0.71;
   margin-right: 0.08em;
-  margin-top: 0.06em;
+  margin-top: 0.01em;
   color: var(--red);
 }
 
-/* --- Layout --- */
+/* ============================================
+   LAYOUT
+   ============================================ */
+
 .container {
   width: min(90%, 780px);
   margin-inline: auto;
@@ -174,12 +218,12 @@ strong {
   margin-inline: auto;
 }
 
-section {
-  padding-block: var(--space-xl);
-}
+/* ============================================
+   NAV
+   Scoped to nav.site-nav so .toc nav is unaffected.
+   ============================================ */
 
-/* --- Nav --- */
-nav {
+nav.site-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -209,6 +253,7 @@ nav {
 .nav-links {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-m);
 }
 
@@ -264,13 +309,16 @@ nav {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* --- Hero / This Way In --- */
+/* ============================================
+   HERO
+   ============================================ */
+
 .hero {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 4rem;
+  padding-top: 5rem;
 }
 
 .hero-eyebrow {
@@ -312,7 +360,75 @@ nav {
   margin-block: var(--space-l);
 }
 
-/* --- Section headers --- */
+/* ============================================
+   EASTER EGG — secret key glyph
+   ============================================ */
+
+.secret-key {
+  font-size: 0.18em;
+  color: #8a8475;
+  cursor: default;
+  vertical-align: middle;
+  margin-left: 0.15em;
+  transition: color 0.3s ease;
+  position: relative;
+  user-select: none;
+}
+
+.secret-key:hover,
+.secret-key.open {
+  color: var(--red);
+}
+
+.key-bloom {
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
+  background: var(--bg);
+  border: 1px solid var(--faint);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 1.2em 1.6em;
+  min-width: 220px;
+  z-index: 200;
+  opacity: 0;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.key-bloom.open {
+  transform: translateX(-50%) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.key-bloom p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.9;
+  max-width: 100%;
+  text-indent: 0;
+  margin: 0;
+}
+
+.key-bloom p span {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--red);
+  font-style: normal;
+}
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+
 .section-label {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -329,14 +445,16 @@ nav {
   margin-bottom: var(--space-m);
 }
 
-/* --- Divider --- */
 .divider {
   border: none;
   border-top: 1px solid var(--faint);
   margin-block: var(--space-l);
 }
 
-/* --- Work cards (The Shack) --- */
+/* ============================================
+   WORK CARDS — The Shack
+   ============================================ */
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -378,7 +496,10 @@ nav {
   max-width: 100%;
 }
 
-/* --- Redberries (log) list --- */
+/* ============================================
+   REDBERRIES — log list
+   ============================================ */
+
 .berry-list {
   list-style: none;
   margin-top: var(--space-m);
@@ -412,7 +533,10 @@ nav {
   border: none;
 }
 
-/* --- Footer --- */
+/* ============================================
+   FOOTER
+   ============================================ */
+
 footer {
   padding-block: var(--space-l);
   border-top: 1px solid var(--faint);
@@ -428,11 +552,14 @@ footer p {
   text-indent: 0;
 }
 
-/* --- Prose pages (individual redberry, shack entry) --- */
+/* ============================================
+   PROSE — individual post pages
+   ============================================ */
+
 .prose {
   max-width: var(--measure);
   margin-inline: auto;
-  padding-top: 6rem;
+  padding-top: 5rem;
   padding-bottom: var(--space-xl);
 }
 
@@ -448,9 +575,63 @@ footer p {
   margin-bottom: var(--space-l);
 }
 
+/* first paragraph after the header block never gets indent */
 .prose p:first-of-type {
   text-indent: 0;
 }
+
+/* ============================================
+   TABLE OF CONTENTS
+   ============================================ */
+
+.toc {
+  border: 1px solid var(--faint);
+  padding: var(--space-m);
+  margin-bottom: var(--space-l);
+  max-width: 42ch;
+}
+
+.toc-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-variant: small-caps;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  margin-bottom: var(--space-xs);
+  max-width: 100%;
+  text-indent: 0;
+}
+
+.toc ol {
+  list-style: decimal;
+  padding-left: 1.2em;
+  margin: 0;
+}
+
+.toc li {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.toc li ol {
+  list-style: lower-alpha;
+  margin-top: 0;
+}
+
+.toc a {
+  color: var(--ink);
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.toc a:hover {
+  color: var(--red);
+}
+
+/* ============================================
+   CODE & PRE
+   ============================================ */
 
 code {
   font-family: var(--font-mono);
@@ -463,12 +644,11 @@ code {
 pre {
   background: #1a1a1a;
   color: #f7f4ef;
-  padding: var(--space-m);
   overflow-x: auto;
   margin-block: var(--space-m);
-  font-family: var(--font-mono);
   padding: var(--space-s);
   border-radius: 4px;
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -479,34 +659,43 @@ pre code {
   font-size: inherit;
 }
 
-/* --- Responsive --- */
-
-/* --- Mobile Nav --- */
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-s);
+/* line number gutter (giallo) */
+.giallo-ln {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  padding-right: 0.5em;
+  user-select: none;
+  opacity: 0.8;
 }
 
-/* --- Fluid spacing --- */
-.hero {
-  padding-top: 5rem;
+/* ============================================
+   FIGURES & CAPTIONS
+   ============================================ */
+
+figure {
+  margin-block: var(--space-m);
 }
 
-.prose {
-  padding-top: 5rem;
+figcaption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #888;
+  margin-top: 0.5em;
+  text-align: center;
 }
 
-section {
-  scroll-margin-top: 4rem;
-}
+/* ============================================
+   RESPONSIVE — 768px
+   ============================================ */
 
 @media (max-width: 768px) {
   html {
     font-size: 17px;
   }
 
-  nav {
+  nav.site-nav {
     padding: 0.6rem 1rem;
     position: relative;
   }
@@ -583,10 +772,14 @@ section {
     text-align: center;
   }
 
-  .drop-cap::first-letter {
+  .prose .content > p:first-of-type::first-letter {
     font-size: 3.2em;
   }
 }
+
+/* ============================================
+   RESPONSIVE — 480px
+   ============================================ */
 
 @media (max-width: 480px) {
   html {
