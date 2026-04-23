@@ -8,13 +8,14 @@ build_search_index = false
 
 [markdown.highlighting]
 highlight_code = true
+highlight_theme = "css"
+highlighting_themes_css = [
+  { theme = "solarized-light", filename = "giallo.css" }
+]
+
 theme = "solarized-light"
 style = "class"
 code_filenames = true
 line_numbers = true
-
-highlighting_themes_css = [
-  { theme = "solarized-light", filename = "giallo.css" }
-]
 
 [extra]
