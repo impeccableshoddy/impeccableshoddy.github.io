@@ -660,12 +660,19 @@ pre code {
 }
 
 /* line number gutter (giallo) */
+.giallo-l {
+  display: inline-block;
+  line-height: 1.2;
+  min-height: 1.2em;
+  width: 100%;
+}
 .giallo-ln {
   display: inline-block;
+  user-select: none;
+  margin-right: 0.4em;
+  padding: 0.4em;
   min-width: 3ch;
   text-align: right;
-  padding-right: 0.5em;
-  user-select: none;
   opacity: 0.8;
 }
 

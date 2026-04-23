@@ -339,7 +339,7 @@ Then we loop through our number of spheres and for each sphere we calculate it's
 
 And at last we check if `closest_sphere` is still `NULL` if yes, we just return the background color indicating that the ray didn't hit any of our defined objects, otherwise we return the color of the current object it has hit.
 
-## **The End (Seriously .-.)**
+## The End (Seriously .-.)
 
 Well uhh, that was it kind of. (*evades the praises hurled my way*) NO REALLY!
 
@@ -347,7 +347,7 @@ Ummm okay you got me, just a bit more. (*ouch, I'm sorry, I swear we are truly d
 
 But we have a problem, if you have noticed, we haven't mentioned anything about printing or output this whole time. That's because that's what we will be doing now. And it's done by another of our beautiful functions `write_ppm()` right here - 
 
-```c
+```c,linenos
 void write_ppm ( const char *filename, Color pixels[][CANVAS_WIDTH])
 {
     FILE *file = fopen(filename, "w");
