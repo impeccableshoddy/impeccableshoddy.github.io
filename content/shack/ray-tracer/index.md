@@ -91,7 +91,7 @@ But before that let's get a bit more into this and really understand a bit of th
 - **C standard**: C23 (`-std=c23` or `-std=gnu23`)
 - **External Libraries**: `stdio.h`, `math.h`
 - **Build method**: Direct compilation of multiple `.c` files via the command line.
-- **Test command**: `gcc -std=c23 -Wall -Wpedantic *.c -o raytracer`
+- **Test command**: `gcc -std=c23 -Wall -Wextra -Wpedantic -g -O0 -Iinclude *.c -o raytracer`
 
 ### File structure
 
